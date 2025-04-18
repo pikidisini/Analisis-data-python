@@ -45,8 +45,8 @@ product_categories = filtered_df_time['product_category_name_english'].dropna().
 all_categories_option = "Pilih Semua Kategori"
 categories_with_all = [all_categories_option] + list(product_categories)
 
-# Jika ada kategori spesifik yang dipilih, kita tidak menyertakan "Pilih Semua" sebagai default
-default_categories = [all_categories_option] if not st.session_state.get('specific_category_selected', False) else []
+# Secara default, tidak ada kategori yang dipilih saat pertama kali
+default_categories = []
 selected_categories = st.sidebar.multiselect("Pilih Kategori Produk", categories_with_all, default=default_categories)
 
 if all_categories_option in selected_categories and len(selected_categories) > 1:
@@ -59,7 +59,8 @@ elif all_categories_option in selected_categories and len(selected_categories) =
 else:
     filtered_categories = selected_categories
 
-
+# Update session state jika kategori spesifik dipilih
+st.session_state['specific_category_selected'] = all_categories_option not in selected_categories and len(selected_categories) > 0
 
 filtered_df = filtered_df_time[filtered_df_time['product_category_name_english'].isin(filtered_categories)]
 
@@ -68,7 +69,7 @@ first_date = orders_full_df['order_purchase_timestamp'].min().date()
 last_date = orders_full_df['order_purchase_timestamp'].max().date()
 
 time_filter_default = (start_date == first_date and end_date == last_date)
-category_filter_default = (all_categories_option in selected_categories or not selected_categories)
+category_filter_default = not selected_categories # Defaultnya tidak ada yang dipilih
 
 if time_filter_default and category_filter_default:
     df_to_visualize = orders_full_df.copy()
