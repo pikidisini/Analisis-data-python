@@ -11,7 +11,7 @@ order_items_df = pd.read_csv('dashboard/order_items_df.csv')
 customers_df = pd.read_csv('dashboard/customers_df.csv')        
 products_df = pd.read_csv('dashboard/products_df.csv') 
 geolocation_df = pd.read_csv('dashboard/geolocation_df.csv')           
-product_cat_translation_df = pd.read_csv('dashboard/product_category_name_translation.csv')      
+product_cat_translation_df = pd.read_csv('.data/product_category_name_translation.csv')      
 rfm = pd.read_csv('dashboard/rfm.csv') 
 
 # Ubah tipe data order_purchase_timestamp menjadi datetime
@@ -21,7 +21,7 @@ orders_df_clean['order_purchase_timestamp'] = pd.to_datetime(orders_df_clean['or
 orders_items_products_df = pd.merge(order_items_df, products_df, on='product_id')
 orders_full_df = pd.merge(orders_df_clean, customers_df, on='customer_id')
 orders_full_df = pd.merge(orders_full_df, orders_items_products_df, on='order_id')
-orders_full_df = pd.merge(orders_full_df, product_cat_translation_df, on='product_category_name_english', how='left')
+orders_full_df = pd.merge(orders_full_df, product_cat_translation_df, on='product_category_name', how='left')
 orders_full_df = pd.merge(orders_full_df, rfm, on='customer_id', how='left')
 
 st.sidebar.header("Filter")
