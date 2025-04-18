@@ -21,7 +21,7 @@ orders_df_clean['order_purchase_timestamp'] = pd.to_datetime(orders_df_clean['or
 orders_items_products_df = pd.merge(order_items_df, products_df, on='product_id')
 orders_full_df = pd.merge(orders_df_clean, customers_df, on='customer_id')
 orders_full_df = pd.merge(orders_full_df, orders_items_products_df, on='order_id')
-orders_full_df = pd.merge(orders_full_df, product_cat_translation_df, on='product_category_name', how='left')
+orders_full_df = pd.merge(orders_full_df, product_cat_translation_df, on='product_category_name_english', how='left')
 orders_full_df = pd.merge(orders_full_df, rfm, on='customer_id', how='left')
 
 st.sidebar.header("Filter")
