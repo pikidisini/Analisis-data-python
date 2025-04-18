@@ -11,7 +11,7 @@ order_items_df = pd.read_csv('dashboard/order_items_df.csv')
 customers_df = pd.read_csv('dashboard/customers_df.csv')        
 products_df = pd.read_csv('dashboard/products_df.csv') 
 geolocation_df = pd.read_csv('dashboard/geolocation_df.csv')           
-product_cat_translation_df = pd.read_csv('.data/product_category_name_translation.csv')      
+product_cat_translation_df = pd.read_csv('dashboard/product_category_name_translation_2.csv')      
 rfm = pd.read_csv('dashboard/rfm.csv') 
 
 # Ubah tipe data order_purchase_timestamp menjadi datetime
